@@ -9,8 +9,8 @@ receivers:
             - "https://*"
 
 exporters:
-  otlp:
-    endpoint: "jaeger:4317"
+  otlphttp:
+    endpoint: "http://edge:4318"
     tls:
       insecure: true
   logging:
@@ -28,7 +28,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [spanmetrics, batch]
-      exporters: [logging, otlp]
+      exporters: [logging, otlphttp]
     metrics:
       receivers: [otlp]
       processors: [batch]

@@ -21,8 +21,8 @@ x-default-logging: &logging
 
 networks:
   default:
-    name: opentelemetry-demo
-    driver: bridge
+    name: getdatable
+    external: true
 
 services:
   # ******************
