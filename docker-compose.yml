@@ -622,6 +622,8 @@ services:
     ports:
       - "${GRAFANA_SERVICE_PORT}"
     logging: *logging
+    environment:
+      - GRAFANA_SERVICE_PORT
 
   # OpenTelemetry Collector
   otelcol:
