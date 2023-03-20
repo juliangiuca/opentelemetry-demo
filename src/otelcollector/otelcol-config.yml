@@ -47,6 +47,12 @@ processors:
       - context: metric
         statements:
           - set(description, "Measures the duration of inbound HTTP requests") where name == "http.server.duration"
+  filter:
+    metrics:
+      exclude:
+        match_type: strict
+        metric_names:
+          - queueSize
 
 service:
   pipelines:
@@ -56,5 +62,9 @@ service:
       exporters: [logging, otlp, otlphttp]
     metrics:
       receivers: [otlp]
-      processors: [transform, batch]
+      processors: [filter, transform, batch]
       exporters: [prometheus, logging]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
