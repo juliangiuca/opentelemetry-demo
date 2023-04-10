@@ -27,11 +27,9 @@ exporters:
     resource_to_telemetry_conversion:
       enabled: true
     enable_open_metrics: true
+
 processors:
   batch:
-  spanmetrics:
-    metrics_exporter: prometheus
-  # temporary measure until description is fixed in .NET
   transform:
     metric_statements:
       - context: metric
@@ -44,6 +42,9 @@ processors:
         metric_names:
           - queueSize
 
+connectors:
+  spanmetrics:
+
 service:
   pipelines:
     traces:
@@ -51,7 +52,7 @@ service:
       processors: [spanmetrics, batch]
       exporters: [logging, otlp, otlphttp]
     metrics:
-      receivers: [otlp]
+      receivers: [otlp, spanmetrics]
       processors: [filter, transform, batch]
       exporters: [prometheus, logging]
     logs:
