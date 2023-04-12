@@ -14,10 +14,11 @@
 
 version: '3.9'
 x-default-logging: &logging
-  driver: "json-file"
+  driver: fluentd
   options:
-    max-size: "5m"
-    max-file: "2"
+    fluentd-address: 0.0.0.0:24224
+    fluentd-async-connect: "true"
+    tag: docker.{{.ID}}
 
 networks:
   default:
