@@ -21,10 +21,6 @@ exporters:
     endpoint: "http://edge:4318"
     tls:
       insecure: true
-  otlphttp:
-    endpoint: "http://edge:4318"
-    tls:
-      insecure: true
   logging:
   prometheus:
     endpoint: "otelcol:9464"
